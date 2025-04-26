@@ -77,14 +77,21 @@ const SearchResults = ({ searchResults, setSearchResults, onRefresh }: SearchRes
           <div className="text-center py-8 text-gray-500">No images found</div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-4">
-            {searchResults.map((image, index) => (
-              <ImageThumbnail
-                key={index}
-                image={image}
-                isSelected={selectedImageFilenames.includes(image.image_filename)}
-                onSelect={() => toggleImageSelection(image.image_filename)}
-              />
-            ))}
+            {searchResults.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-full py-20 text-center text-gray-500">
+                <div className="text-2xl font-semibold mb-4">No Results</div>
+                <p className="text-md">Try searching for a different image!</p>
+              </div>
+            ) : (
+              searchResults.map((image, index) => (
+                <ImageThumbnail
+                  key={index}
+                  image={image}
+                  isSelected={selectedImageFilenames.includes(image.image_filename)}
+                  onSelect={() => toggleImageSelection(image.image_filename)}
+                />
+              ))
+            )}
           </div>
         )}
       </CardContent>

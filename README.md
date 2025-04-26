@@ -11,15 +11,15 @@ It integrates *semantic search*, *condition-controlled generation*, and *visual 
 - Search by **text prompts** or **reference images**
 - Uses **image embedding space** (CLIP-based) for high-accuracy similarity matching
 
-### 🧠 Embedding Map Visualization
-- Each image is mapped into a **2D semantic space**
-- Explore clusters, discover hidden connections, and visually browse by meaning
-- Built with **Qdrant**, **UMAP/t-SNE**, and **interactive frontend UI**
-
-### 🎨 Controlled Image Generation (Coming Soon)
+### 🎨 Controlled Image Generation
 - Support for **ControlNet** to condition generation with:
   - Pose / Edge / Depth / Segmentation
 - Combine prompt, structure, and style for precise control
+
+### 🧠 Embedding Map Visualization (Coming Soon)
+- Each image is mapped into a **2D semantic space**
+- Explore clusters, discover hidden connections, and visually browse by meaning
+- Built with **Qdrant**, **UMAP/t-SNE**, and **interactive frontend UI**
 
 ### 💾 Lightweight & Local
 - All data stored locally
@@ -140,6 +140,6 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 - [Shakker-Labs/FLUX.1-dev-ControlNet-Union-Pro-2.0](https://huggingface.co/Shakker-Labs/FLUX.1-dev-ControlNet-Union-Pro-2.0)
 
 ## 💬 TODO
-- [ ] ControlNet-based generation UI
+- [x] ControlNet-based generation UI
 - [ ] UMAP-powered image map viewer
 - [ ] Multi-image generation

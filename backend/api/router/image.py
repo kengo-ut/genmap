@@ -44,6 +44,16 @@ async def get_all_simple_metadata():
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@router.get("/all-control-image-filenames", response_model=list[str])
+async def get_all_control_image_filenames():
+    """control_imagesディレクトリにあるすべての画像ファイルについて名前を取得する"""
+    try:
+        result: list[str] = image_service.fetch_all_control_image_filenames()
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @router.post("/search", response_model=list[SimpleMetadata])
 async def search_images(
     image: UploadFile | None = None,

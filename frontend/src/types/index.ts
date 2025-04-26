@@ -1,4 +1,12 @@
 import { SimpleMetadata } from "@/gen/schema";
+import {
+  ImageGenerationParamsControlImageFilename1,
+  ImageGenerationParamsControlImageFilename2,
+  ImageGenerationParamsControlnetConditioningScale1,
+  ImageGenerationParamsControlnetConditioningScale2,
+  ImageGenerationParamsControlGuidanceEnd1,
+  ImageGenerationParamsControlGuidanceEnd2,
+} from "@/gen/schema";
 
 export interface ImageGalleryProps {
   images: SimpleMetadata[];
@@ -41,4 +49,16 @@ export interface FilePickerOptions {
     description?: string; // カテゴリーの説明（省略可能）
     accept: Record<string, string[]>; // MIME タイプと拡張子のマッピング
   }>;
+}
+
+export interface ControlImage1 {
+  controlImageFilename: ImageGenerationParamsControlImageFilename1;
+  controlnetConditioningScale: ImageGenerationParamsControlnetConditioningScale1;
+  controlGuidanceEnd: ImageGenerationParamsControlGuidanceEnd1;
+}
+
+export interface ControlImage2 {
+  controlImageFilename: ImageGenerationParamsControlImageFilename2;
+  controlnetConditioningScale: ImageGenerationParamsControlnetConditioningScale2;
+  controlGuidanceEnd: ImageGenerationParamsControlGuidanceEnd2;
 }

@@ -175,7 +175,21 @@ class ImageService:
                 prompt=str(metadata.prompt),
             )
             simple_metadata_list.append(simple_metadata)
+
+        # 新しい順にして返す
+        simple_metadata_list.reverse()
         return simple_metadata_list
+
+    def fetch_all_control_image_filenames(self) -> list[str]:
+        """control_imagesディレクトリにあるすべての画像ファイルについて名前を取得"""
+        control_image_dir = Path(self.local_storage_client.control_image_dir)
+        if not control_image_dir.exists():
+            return []
+        return [
+            p.name
+            for p in control_image_dir.glob("*")
+            if p.is_file() and p.suffix.lower() in [".jpg", ".jpeg", ".png"]
+        ]
 
     async def search_similar_images(
         self,

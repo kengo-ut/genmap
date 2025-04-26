@@ -5,7 +5,11 @@ import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { ImageGeneratorProps } from "@/types";
+import { ControlImage1, ControlImage2, ImageGeneratorProps } from "@/types";
+import { Switch } from "@/components/ui/switch";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { HelpCircle } from "lucide-react";
+import ControlImageSelector from "@/components/ControlImageSelector";
 
 const ImageGenerator: React.FC<ImageGeneratorProps> = ({ onImageGenerated }) => {
   const [prompt, setPrompt] = useState("");
@@ -15,6 +19,31 @@ const ImageGenerator: React.FC<ImageGeneratorProps> = ({ onImageGenerated }) => 
   const [guidanceScale, setGuidanceScale] = useState(3.5);
   const [seed, setSeed] = useState<number>(42);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [useControlImage, setUseControlImage] = useState(false);
+  const [controlImage1, setControlImage1] = useState<ControlImage1>({
+    controlImageFilename: null,
+    controlnetConditioningScale: null,
+    controlGuidanceEnd: null,
+  });
+  const [controlImage2, setControlImage2] = useState<ControlImage2>({
+    controlImageFilename: null,
+    controlnetConditioningScale: null,
+    controlGuidanceEnd: null,
+  });
+
+  const handleChangeControlImage1 = (update: Partial<ControlImage1>) => {
+    setControlImage1((prev) => ({
+      ...prev,
+      ...update,
+    }));
+  };
+
+  const handleChangeControlImage2 = (update: Partial<ControlImage2>) => {
+    setControlImage2((prev) => ({
+      ...prev,
+      ...update,
+    }));
+  };
 
   // Generate image
   const handleGenerateImage = async () => {
@@ -24,6 +53,12 @@ const ImageGenerator: React.FC<ImageGeneratorProps> = ({ onImageGenerated }) => 
         prompt: prompt,
         width: width,
         height: height,
+        control_image_filename_1: controlImage1.controlImageFilename,
+        control_image_filename_2: controlImage2.controlImageFilename,
+        controlnet_conditioning_scale_1: controlImage1.controlnetConditioningScale,
+        controlnet_conditioning_scale_2: controlImage2.controlnetConditioningScale,
+        control_guidance_end_1: controlImage1.controlGuidanceEnd,
+        control_guidance_end_2: controlImage2.controlGuidanceEnd,
         num_inference_steps: numInferenceSteps,
         guidance_scale: guidanceScale,
         seed: seed,
@@ -39,12 +74,47 @@ const ImageGenerator: React.FC<ImageGeneratorProps> = ({ onImageGenerated }) => 
     }
   };
 
+  console.log(useControlImage);
+
   return (
     <Card className="shadow-lg border border-gray-200 rounded-lg">
       <CardHeader className="p-4">
         <CardTitle className="text-2xl font-semibold">Generation</CardTitle>
       </CardHeader>
       <CardContent className="p-4">
+        <div className="mb-4">
+          {/* Control Image Toggle */}
+          <div className="flex items-center space-x-2">
+            <Switch
+              id="control-image"
+              checked={useControlImage}
+              onCheckedChange={() => setUseControlImage(!useControlImage)}
+            />
+            <Label htmlFor="cross-modal" className="text-md font-semibold">
+              use control images
+            </Label>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <HelpCircle className="w-4 h-4 text-gray-400 cursor-pointer" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Use control images to guide generation</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
+        </div>
+        {useControlImage && (
+          <div className="mb-4">
+            <ControlImageSelector
+              controlImage1={controlImage1}
+              controlImage2={controlImage2}
+              onChangeControlImage1={handleChangeControlImage1}
+              onChangeControlImage2={handleChangeControlImage2}
+            />
+          </div>
+        )}
         <div className="mb-4">
           <label className="block text-md font-semibold mb-1">prompt:</label>
           <Input
@@ -63,8 +133,9 @@ const ImageGenerator: React.FC<ImageGeneratorProps> = ({ onImageGenerated }) => 
           </Label>
           <Slider
             defaultValue={[width]}
-            min={100}
+            min={64}
             max={1024}
+            step={16}
             onValueChange={(value) => setWidth(value[0])}
             disabled={isGenerating}
           />
@@ -76,8 +147,9 @@ const ImageGenerator: React.FC<ImageGeneratorProps> = ({ onImageGenerated }) => 
           </Label>
           <Slider
             defaultValue={[height]}
-            min={100}
+            min={64}
             max={1024}
+            step={16}
             onValueChange={(value) => setHeight(value[0])}
             disabled={isGenerating}
           />

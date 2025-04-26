@@ -38,6 +38,17 @@ export const getAllSimpleMetadataApiImageAllSimpleMetadataGet = <
   return axios.get(`/api/image/all-simple-metadata`, options);
 };
 /**
+ * control_imagesディレクトリにあるすべての画像ファイルについて名前を取得する
+ * @summary Get All Control Image Filenames
+ */
+export const getAllControlImageFilenamesApiImageAllControlImageFilenamesGet = <
+  TData = AxiosResponse<string[]>,
+>(
+  options?: AxiosRequestConfig
+): Promise<TData> => {
+  return axios.get(`/api/image/all-control-image-filenames`, options);
+};
+/**
  * テキストまたは画像に基づいて類似画像を検索する
  * @summary Search Images
  */
@@ -72,6 +83,9 @@ export const deleteImagesApiImageDeleteDelete = <TData = AxiosResponse<DeleteRes
 export type GenerateImageApiImageGeneratePostResult = AxiosResponse<SimpleMetadata>;
 export type GetAllSimpleMetadataApiImageAllSimpleMetadataGetResult = AxiosResponse<
   SimpleMetadata[]
+>;
+export type GetAllControlImageFilenamesApiImageAllControlImageFilenamesGetResult = AxiosResponse<
+  string[]
 >;
 export type SearchImagesApiImageSearchPostResult = AxiosResponse<SimpleMetadata[]>;
 export type DeleteImagesApiImageDeleteDeleteResult = AxiosResponse<DeleteResponse>;
