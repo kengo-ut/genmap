@@ -8,3 +8,7 @@ Thumbs.db
 
 # Datadir
 data/
+
+# Python
+.mypy_cache
+.ruff_cache

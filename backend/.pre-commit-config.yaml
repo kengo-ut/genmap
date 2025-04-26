@@ -22,4 +22,4 @@ repos:
         description: Type checker for Python
         entry: mypy
         types: [python]
-        args: [--ignore-missing-imports, --exclude, '(.venv|build|dist)']
+        args: [--ignore-missing-imports, --exclude, .venv]

@@ -1,9 +1,5 @@
 import torch
-from diffusers import (
-    ControlNetModel,
-    StableDiffusionControlNetPipeline,
-    UniPCMultistepScheduler,
-)
+from diffusers import FluxControlNetModel, FluxControlNetPipeline
 from PIL import Image
 
 from api.config import Settings
@@ -14,19 +10,17 @@ class DiffusionClient:
         self.pipe = self._load_pipeline(settings)
 
     def _load_pipeline(self, settings):
-        """Stable Diffusionのパイプラインをロード"""
-        controlnet = ControlNetModel.from_pretrained(
+        """Fluxのパイプラインをロード"""
+        controlnet = FluxControlNetModel.from_pretrained(
             settings.CONTROLNET_MODEL, torch_dtype=torch.bfloat16
-        ).to(settings.DEVICE)
+        )
 
-        pipe = StableDiffusionControlNetPipeline.from_pretrained(
+        pipe = FluxControlNetPipeline.from_pretrained(
             settings.SD_BASE_MODEL,
-            controlnet=controlnet,
-            safety_checker=None,
+            controlnet=[controlnet],
             torch_dtype=torch.bfloat16,
         ).to(settings.DEVICE)
 
-        pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
         return pipe
 
     def generate_image(
@@ -45,7 +39,7 @@ class DiffusionClient:
         # Generate images
         image: Image.Image = self.pipe(
             prompt=prompt,
-            image=control_images,
+            control_image=control_images,
             width=width,
             height=height,
             controlnet_conditioning_scale=controlnet_conditioning_scale,

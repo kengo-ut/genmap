@@ -79,41 +79,40 @@ class ImageService:
                 )
             )
 
-        controlnet_conditioning_scales: list[float] = []
+        controlnet_conditioning_scale: list[float] = []
         if controlnet_conditioning_scale_1:
-            controlnet_conditioning_scales.append(controlnet_conditioning_scale_1)
+            controlnet_conditioning_scale.append(controlnet_conditioning_scale_1)
         if controlnet_conditioning_scale_2:
-            controlnet_conditioning_scales.append(controlnet_conditioning_scale_2)
+            controlnet_conditioning_scale.append(controlnet_conditioning_scale_2)
 
-        control_guidances_end: list[float] = []
+        control_guidance_end: list[float] = []
         if control_guidance_end_1:
-            control_guidances_end.append(control_guidance_end_1)
+            control_guidance_end.append(control_guidance_end_1)
         if control_guidance_end_2:
-            control_guidances_end.append(control_guidance_end_2)
+            control_guidance_end.append(control_guidance_end_2)
 
         ## サイズが同じか検証する
-        if len(control_images) != len(controlnet_conditioning_scales):
+        if len(control_images) != len(controlnet_conditioning_scale):
             raise ValueError(
                 "Control images and conditioning scales must match in length."
             )
-        if len(control_images) != len(control_guidances_end):
+        if len(control_images) != len(control_guidance_end):
             raise ValueError("Control images and guidance ends must match in length.")
 
         ## サイズが2以下であることを検証する
-        control_image: Image.Image = Image.new("RGB", (width, height), (255, 255, 255))
-        controlnet_conditioning_scale: float = 0.0
-        control_guidance_end: float = 0.8
-        if len(control_images) == 1:
-            control_image = control_images[0]
-            controlnet_conditioning_scale = controlnet_conditioning_scales[0]
-            control_guidance_end = control_guidances_end[0]
-        elif len(control_images) >= 2:
+        if len(control_images) > 2:
             raise ValueError("Control images must be 0, 1, or 2 in length.")
+
+        ## サイズが0の場合、ダミー画像を与える
+        if not control_images:
+            control_images = [Image.new("RGB", (width, height), (255, 255, 255))]
+            controlnet_conditioning_scale = [0.0]
+            control_guidance_end = [0.1]
 
         # 2. 画像生成
         image: Image.Image = self.diffusion_client.generate_image(
             prompt=prompt,
-            control_images=control_image,
+            control_images=control_images,
             width=width,
             height=height,
             controlnet_conditioning_scale=controlnet_conditioning_scale,

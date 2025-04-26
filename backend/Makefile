@@ -16,7 +16,7 @@ fmt:
 
 lint:
 	ruff check . --fix
-	mypy . --ignore-missing-imports --exclude '(.venv|build|dist)'
+	mypy . --ignore-missing-imports --exclude .venv
 
 check:
 	pre-commit run --all-files --show-diff-on-failure

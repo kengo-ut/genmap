@@ -9,6 +9,13 @@
 uv sync
 ```
 
+### Set env
+Create a `.envrc` file and set the Python path (full path to the backend directory).
+
+```
+export PYTHONPATH=/xxxxx/backend
+```
+
 ### Run
 ```bash
 make dev

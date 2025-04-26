@@ -34,10 +34,10 @@ class Settings(BaseSettings):
     COLLECTION_NAME: str = "image_embeddings"
 
     # モデル
-    SD_BASE_MODEL: str = (
-        "runwayml/stable-diffusion-v1-5"  # Stable Diffusion ベースモデル
+    SD_BASE_MODEL: str = "black-forest-labs/FLUX.1-dev"  # Stable Diffusion ベースモデル
+    CONTROLNET_MODEL: str = (
+        "Shakker-Labs/FLUX.1-dev-ControlNet-Union-Pro-2.0"  # ControlNet モデル
     )
-    CONTROLNET_MODEL: str = "lllyasviel/sd-controlnet-openpose"  # ControlNet モデル
 
     CLIP_EMBEDDING_MODEL: str = (
         "openai/clip-vit-base-patch32"  # 画像・テキスト埋め込み用のCLIPモデル

@@ -3,7 +3,7 @@ name = "backend"
 version = "0.1.0"
 description = "Backend service for the application"
 readme = "README.md"
-requires-python = "~=3.13"
+requires-python = "~=3.12"
 dependencies = [
     "accelerate>=1.6.0",
     "diffusers>=0.33.1",

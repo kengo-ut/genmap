@@ -17,16 +17,16 @@ def diffusion_client():
 def dummy_data():
     """テスト用のダミーデータを返す"""
     return {
-        "prompt": "A girl waves her hands.",
+        "prompt": "A young girl stands at the edge of a tranquil beach, her pastel dress and flowing hair swaying in the sea breeze. The golden sunset bathes her serene face, with gentle waves, distant cliffs, and a clear sky framing the peaceful scene.",
         "control_images": [
             load_image(f"{test_settings.CONDITION_IMAGE_DIR}/sample.png")
         ],
         "width": 512,
-        "height": 512,
-        "controlnet_conditioning_scale": (0.5),
-        "control_guidance_end": (0.8),
-        "num_inference_steps": 5,
-        "guidance_scale": 7.5,
+        "height": 768,
+        "controlnet_conditioning_scale": [0.9],
+        "control_guidance_end": [0.65],
+        "num_inference_steps": 30,
+        "guidance_scale": 3.5,
         "seed": 42,
     }
 
