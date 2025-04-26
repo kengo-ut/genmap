@@ -5,8 +5,6 @@ It integrates *semantic search*, *condition-controlled generation*, and *visual 
 
 ![GenMap UI Preview](./assets/genmap-preview.png)
 
----
-
 ## 🚀 Features
 
 ### 🔍 Semantic Search (Text & Image)
@@ -30,8 +28,6 @@ It integrates *semantic search*, *condition-controlled generation*, and *visual 
   - Embeddings indexed in **Qdrant**
 - Ideal for **research**, **experiments**, or **personal dataset curation**
 
----
-
 ## 🧱 Tech Stack
 
 | Layer | Technology |
@@ -43,8 +39,6 @@ It integrates *semantic search*, *condition-controlled generation*, and *visual 
 | Embedding Index | Qdrant |
 | Embedding Model | CLIP (via 🤗 Transformers or OpenCLIP) |
 | Optional Gen | ControlNet + Stable Diffusion backend (Flux.1) |
-
----
 
 ## 🗂️ Project Structure
 ```plaintext
@@ -72,8 +66,6 @@ genmap/
 └── README.md            # Project documentation
 ```
 
----
-
 ## 🛠️ Getting Started
 
 ### 1. Clone the repository
@@ -82,37 +74,56 @@ git clone https://github.com/kengo-ut/genmap.git
 cd genmap
 ```
 
-### 2. Install dependencies
-#### Backend
+### 2. Set backend
 ```bash
 cd backend
+```
+
+#### Install dependencies
+```bash
 uv sync
 ```
 
-#### Frontend
+#### Set env
+Create a `.envrc` file and set the Python path (full path to the backend directory).
+
+```
+export PYTHONPATH=/xxxxx/backend
+```
+
+#### Run
+```bash
+make dev
+```
+
+### 3. Set frontend
 ```bash
 cd frontend
+```
+
+#### Install dependencies
+```bash
 volta install
 yarn
 ```
 
-### 3. Run the application
-#### Backend
-```bash
-cd backend
-make dev
+#### Set env
+Create a `.env.local` file and set the below url.
+
+```
+NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:8000
 ```
 
-#### Frontend
+#### Place data
+Create a `public/data/control_images` directory and place control images (canny, soft edge, depth, pose, or gray) used for controlling image generation in it.
+
+#### Run
 ```bash
-cd frontend
 yarn dev
 ```
 
 ### 4. Access the application
 Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
-
----
 
 ## 🧩 Use Cases
 - Prompt-based image dataset analysis
@@ -120,19 +131,13 @@ Open your browser and navigate to [http://localhost:3000](http://localhost:3000)
 - Pose- or structure-guided image generation (via ControlNet)
 - Internal tool for creative research or model fine-tuning
 
----
-
 ## 📜 License
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
-
----
 
 ## 🙏 Acknowledgements
 - [openai/clip-vit-base-patch32](https://huggingface.co/openai/clip-vit-base-patch32)
 - [black-forest-labs/FLUX.1-dev](https://huggingface.co/black-forest-labs/FLUX.1-dev)
 - [Shakker-Labs/FLUX.1-dev-ControlNet-Union-Pro-2.0](https://huggingface.co/Shakker-Labs/FLUX.1-dev-ControlNet-Union-Pro-2.0)
-
----
 
 ## 💬 TODO
 - [ ] ControlNet-based generation UI

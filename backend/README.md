@@ -1,7 +1,5 @@
 # Backend (GenMap API)
 
----
-
 ## Setup
 
 ### Installation

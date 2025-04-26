@@ -20,16 +20,32 @@ class Settings(BaseSettings):
 
     # データベース
     IMAGE_DIR: str = str(
-        Path(__file__).resolve().parents[1] / "data" / "generated_images"
+        Path(__file__).resolve().parents[3]
+        / "frontend"
+        / "public"
+        / "data"
+        / "generated_images"
     )
     CONDITION_IMAGE_DIR: str = str(
-        Path(__file__).resolve().parents[1] / "data" / "control_images"
+        Path(__file__).resolve().parents[3]
+        / "frontend"
+        / "public"
+        / "data"
+        / "control_images"
     )
     SQLITE_DB_PATH: str = str(
-        Path(__file__).resolve().parents[1] / "data" / "metadata.db"
+        Path(__file__).resolve().parents[3]
+        / "frontend"
+        / "public"
+        / "data"
+        / "metadata.db"
     )
     QDRANT_DB_PATH: str = str(
-        Path(__file__).resolve().parents[1] / "data" / "embeddings.db"
+        Path(__file__).resolve().parents[3]
+        / "frontend"
+        / "public"
+        / "data"
+        / "embeddings.db"
     )
     COLLECTION_NAME: str = "image_embeddings"
 

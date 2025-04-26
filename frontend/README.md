@@ -1,33 +1,32 @@
-# front
+# Frontend
 
-## 環境構築
+## Setup
 
-### パッケージマネージャーのインストール
-
-[Volta](https://volta.sh/) を使用して Node.js と Yarn をインストールする
+### Installation
+Install Node.js / yarn with [Volta](https://volta.sh/)
 
 ```bash
 volta install node
 volta install yarn
 ```
 
-### パッケージインストール
+Install dependencies
 
 ```bash
 yarn
 ```
 
-### 環境変数
-
-環境変数ファイル`.env.local`を作成し、以下の環境変数を設定する (xxxxx は適切な内容に置き換える)
+### Set env
+Create a `.env.local` file and set the below url.
 
 ```
 NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:8000
-NEXT_PUBLIC_IMAGE_BASE_URL=xxxxx
 ```
 
-### 開発サーバーの立ち上げ
+### Place data
+Create a `public/data/control_images` directory and place control images (canny, soft edge, depth, pose, or gray) used for controlling image generation in it.
 
+### Run
 ```bash
 yarn dev
 ```
