@@ -132,12 +132,18 @@ Open your browser and navigate to [http://localhost:3000](http://localhost:3000)
 - Internal tool for creative research or model fine-tuning
 
 ## 📜 License
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+This project uses the following licenses:
+
+- MIT License for OpenAI's CLIP model (clip-vit-base-patch32)
+- CreativeML Open RAIL-M License for Black Forest Labs' FLUX.1-dev model
+
+See the [LICENSE](./LICENSE) file for details.
 
 ## 🙏 Acknowledgements
-- [openai/clip-vit-base-patch32](https://huggingface.co/openai/clip-vit-base-patch32)
-- [black-forest-labs/FLUX.1-dev](https://huggingface.co/black-forest-labs/FLUX.1-dev)
-- [Shakker-Labs/FLUX.1-dev-ControlNet-Union-Pro-2.0](https://huggingface.co/Shakker-Labs/FLUX.1-dev-ControlNet-Union-Pro-2.0)
+This project uses:
+- [FLUX.1-dev-ControlNet-Union-Pro-2.0](https://huggingface.co/Shakker-Labs/FLUX.1-dev-ControlNet-Union-Pro-2.0) (CreativeML Open RAIL-M License)
+- [FLUX.1-dev](https://huggingface.co/black-forest-labs/FLUX.1-dev) (CreativeML Open RAIL-M License)
+- [openai/clip-vit-base-patch32](https://huggingface.co/openai/clip-vit-base-patch32) (MIT License)
 
 ## 💬 TODO
 - [x] ControlNet-based generation UI
