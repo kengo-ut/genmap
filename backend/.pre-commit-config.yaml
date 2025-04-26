@@ -1,0 +1,25 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.5
+    hooks:
+      - id: ruff
+        name: ruff
+        description: Run 'ruff check' on Python files
+        entry: ruff check
+        types_or: [python, pyi]
+        args: [--fix]
+      - id: ruff-format
+        name: ruff-format
+        description: Run 'ruff format' on Python files
+        entry: ruff format
+        types_or: [python, pyi]
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.15.0
+    hooks:
+      - id: mypy
+        name: mypy
+        description: Type checker for Python
+        entry: mypy
+        types: [python]
+        args: [--ignore-missing-imports, --exclude, '(.venv|build|dist)']
