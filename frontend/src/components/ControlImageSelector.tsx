@@ -9,7 +9,7 @@ import {
 import { Slider } from "@/components/ui/slider";
 import { ControlImage1, ControlImage2 } from "@/types";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, CardContent, CardTitle, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -40,6 +40,12 @@ const ControlImageSelector: React.FC<ControlImageSelectorProps> = ({
       alert("Failed to reload control images.");
     }
   };
+
+  // Fetch all control images on load
+  useEffect(() => {
+    handleReloadControlImages();
+  }, []);
+
   return (
     <div>
       <Button

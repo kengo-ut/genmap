@@ -74,8 +74,6 @@ const ImageGenerator: React.FC<ImageGeneratorProps> = ({ onImageGenerated }) => 
     }
   };
 
-  console.log(useControlImage);
-
   return (
     <Card className="shadow-lg border border-gray-200 rounded-lg">
       <CardHeader className="p-4">
